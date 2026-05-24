@@ -43,7 +43,7 @@ The project follows the **Systems Engineering** V-Model. Task 1 delivers SysML d
 | **Color‑Based Reaction** | <ul><li> **Red** → Servo arm pushes obstacle away.</li><li> **Blue** → Vehicle steers around obstacle.</li><li> **Green** →.</li></ul> |
 | **Speed Optimization** | Slows down on curves (based on line deviation), speeds up on straights. |
 | **Routing** | Selectable **Oval** (continuous loop) or **Figure‑8** (intersection handling). |
-| **Automatic Parking** | Detects a line-end marker (black stripe) → stops. |
+| **Automatic Parking** | Detects a line-end marker  → stops. |
 | **Safety** | Emergency stop when obstacle too close or line lost. |
 
 ---
@@ -68,14 +68,11 @@ All models are available in the [`/docs/sysml`](/docs/sysml) folder as diagrams 
 
 A fully functional simulation was built in **Tinkercad Circuits**. It uses:
 
-- Arduino Uno R3
+- Arduino Uno R4
 - 2× IR line tracking sensors
-- 1× HC‑SR04 ultrasonic sensor
-- 1× RGB LED + 3× photoresistors (simulated color detection)
-- 1× Servo motor (for removal)
-- 2× DC motors with L293D driver
-- 1× push button (route selection)
-- 1× buzzer (parking signal)
+- 2× HC-HR04 ultrasonic sensor
+- 2× DC motors
+
 
 ###  Simulation Walkthrough
 
