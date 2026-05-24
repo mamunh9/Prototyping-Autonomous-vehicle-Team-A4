@@ -19,7 +19,6 @@
 - [Code Structure](#code-structure)
 - [Results & Demonstration](#results--demonstration)
 - [Future Work](#future-work)
-- [License](#license)
 
 ---
 
@@ -44,11 +43,11 @@ The project follows the **Systems Engineering** V-Model. Task 1 delivers SysML d
 | Feature | Description |
 |---------|-------------|
 | **Line Detection** | 2× IR sensors detect line position (left/right/center). |
-| **Obstacle Detection** | Ultrasonic HC‑SR04 measures distance (<15cm triggers reaction). |
-| **Color‑Based Reaction** | <ul><li> **Red** → Servo arm pushes obstacle away.</li><li> **Blue** → Vehicle steers around obstacle.</li><li> **Green** → Wait 2 seconds then proceed.</li></ul> |
+| **Obstacle Detection** | Ultrasonic HC‑SR04 measures distance. |
+| **Color‑Based Reaction** | <ul><li> **Red** → Servo arm pushes obstacle away.</li><li> **Blue** → Vehicle steers around obstacle.</li><li> **Green** →.</li></ul> |
 | **Speed Optimization** | Slows down on curves (based on line deviation), speeds up on straights. |
 | **Routing** | Selectable **Oval** (continuous loop) or **Figure‑8** (intersection handling). |
-| **Automatic Parking** | Detects a line-end marker (black stripe) → stops and sounds buzzer. |
+| **Automatic Parking** | Detects a line-end marker (black stripe) → stops. |
 | **Safety** | Emergency stop when obstacle too close or line lost. |
 
 ---
