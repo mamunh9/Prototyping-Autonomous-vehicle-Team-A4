@@ -1,7 +1,7 @@
 # Autonomous Driving Vehicle – Line Following with Obstacle Handling & Parking
 
 
-> **Academic Project** – Development of an autonomous vehicle that follows a line, detects obstacles (by color), avoids them, optimizes speed, supports different routings (oval, figure-8), and parks autonomously.
+> **Semester Project** – Development of an autonomous vehicle as a semester project for Prototyping and System Engineering module at Hochschule Hamm-Lippstadt that follows a line, detects obstacles (by color), avoids them, optimizes speed, supports different routings (oval, figure-8), and parks autonomously.
 
 ---
 
