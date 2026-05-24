@@ -89,6 +89,6 @@ A fully functional simulation was built in **Tinkercad Circuits**. It uses:
 ### Contributors
 
 - [Md Mamun Hossain](https://github.com/mamunh9)
-- []()
-- []()
-- []()
+- [Ryota Takeuchi](https://github.com/Ryota339951)
+- [S M Mahmud Hasan](https://github.com/Redoy-Hasan)
+- [Md Jehadul Hasan](https://github.com/Mdjehad533)
