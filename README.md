@@ -1,9 +1,5 @@
 # Autonomous Driving Vehicle – Line Following with Obstacle Handling & Parking
 
-![Arduino](https://img.shields.io/badge/Arduino-Uno-00979D?logo=arduino&logoColor=white)
-![Tinkercad](https://img.shields.io/badge/Simulation-Tinkercad-1477D1?logo=tinkercad&logoColor=white)
-![SysML](https://img.shields.io/badge/Modeling-SysML-005A9C)
-![License](https://img.shields.io/badge/License-MIT-green)
 
 > **Academic Project** – Development of an autonomous vehicle that follows a line, detects obstacles (by color), avoids them, optimizes speed, supports different routings (oval, figure-8), and parks autonomously.
 
