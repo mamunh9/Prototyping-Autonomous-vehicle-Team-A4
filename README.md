@@ -11,7 +11,7 @@
 - [System Diagrams)]
 - [Tinkercad Simulation]
 - [Hardware]
-- [Assembly]
+- [Assembly](https://github.com/mamunh9/Prototyping-Autonomous-vehicle-Team-A4/tree/main/Assembly)
 - [Code Structure](#code-structure)
 - [Results & Demonstration](#results--demonstration)
 
