@@ -8,15 +8,14 @@
 ##  Table of Contents
 - [Overview](#overview)
 - [Features](#features)
-- [System Engineering Model (SysML)](#system-engineering-model-sysml)
-- [Tinkercad Simulation Prototype](#tinkercad-simulation-prototype)
-- [Hardware Prototype (Upcoming)](#hardware-prototype-upcoming)
-- [Setup & Usage](#setup--usage)
+- [System Diagrams)]
+- [Tinkercad Simulation]
+- [Hardware]
+- [Assembly]
 - [Code Structure](#code-structure)
 - [Results & Demonstration](#results--demonstration)
-- [Future Work](#future-work)
 
----
+
 
 ## Overview
 
