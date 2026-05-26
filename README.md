@@ -6,11 +6,12 @@
 ---
 
 ##  Table of Contents
-- [Overview](#overview)
+- [Overview](https://github.com/mamunh9/Prototyping-Autonomous-vehicle-Team-A4/blob/main/README.md)
 - [Features](#features)
-- [System Diagrams)]
-- [Tinkercad Simulation]
-- [Hardware]
+- [System Diagrams](https://github.com/mamunh9/Prototyping-Autonomous-vehicle-Team-A4/tree/main/System%20Diagrams)
+- [Tinkercad Simulation](https://github.com/mamunh9/Prototyping-Autonomous-vehicle-Team-A4/tree/main/Tinkercad%20Simulation)
+- [Hardware](https://github.com/mamunh9/Prototyping-Autonomous-vehicle-Team-A4/tree/main/Hardware)
+- [Prototype Design](https://github.com/mamunh9/Prototyping-Autonomous-vehicle-Team-A4/tree/main/Prototype%20Design)
 - [Assembly](https://github.com/mamunh9/Prototyping-Autonomous-vehicle-Team-A4/tree/main/Assembly)
 - [Code Structure](#code-structure)
 - [Results & Demonstration](#results--demonstration)
