@@ -1,13 +1,3 @@
-/*
- * IR Sensor Test — no motors
- * Wiring: Left IR=D5, Right IR=D4
- *
- * Upload this sketch, open Serial Monitor at 9600 baud.
- * Place each sensor over black line vs white surface and watch values:
- *   1 = on line (HIGH), 0 = off line (LOW)  — matches main sketch ON_LINE = HIGH
- *
- * If values look reversed on your track, your sensors may use LOW = on line.
- */
 
 #define IR_LEFT   5
 #define IR_RIGHT  4
