@@ -1,13 +1,3 @@
-/*
- * Ultrasonic Sensor Test — no motors
- * Wiring: Left TRIG=12 ECHO=13, Right TRIG=3 ECHO=2
- *
- * Upload this sketch, open Serial Monitor at 9600 baud.
- * Move your hand in front of each sensor and watch distance in cm.
- *   ~3–400 cm = normal range
- *   1000 = no echo (out of range or wiring issue)
- */
-
 #define LEFT_TRIG   12
 #define LEFT_ECHO   13
 #define RIGHT_TRIG  3
