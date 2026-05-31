@@ -1,11 +1,4 @@
-/*
- * Motor Test — wheels only
- * Wiring: IN1=6, IN2=7, IN3=8, IN4=9, ENA=10, ENB=11
- *
- * Upload this sketch, then watch the wheels cycle:
- *   forward → backward → turn left → turn right → rotate left → rotate right → stop
- * Each step runs for 2 seconds.
- */
+
 
 #define IN1 6
 #define IN2 7
