@@ -1,18 +1,3 @@
-/*
- * Line-Following Car with Obstacle Avoidance
- * Arduino Uno + L298N (ENA/ENB on D10/D11) + 2x KY-033 IR + 2x HC-SR04
- *
- * HARDWARE: Ultrasonic sensors are fixed on the front board. Scanning is done
- * by turning the whole car, then reading distance with sensors still facing forward.
- *
- * TUNING NOTES:
- * 1. If the car drives backward, swap LOW/HIGH on IN1/IN2 or IN3/IN4 for that motor side.
- * 2. If it turns the wrong way on curves, change ON_LINE to LOW (sensor polarity varies).
- * 3. Adjust SPEED_STRAIGHT / SPEED_TURN / SPEED_AVOID if motors stall (min ~60–65).
- * 4. Adjust *_MS delay constants for obstacle bypass if needed.
- * 5. ROTATE_SCAN_MS — peek-turn duration with fixed forward sensors.
- */
-
 // --- Motor direction pins ---
 #define IN1 6   // Left motor A
 #define IN2 7   // Left motor B
