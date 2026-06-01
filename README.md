@@ -1,10 +1,9 @@
-# 🚗 Autonomous Driving Vehicle – Line Following with Obstacle Handling & Parking
+# Autonomous Driving Vehicle – Line Following with Obstacle Handling & Parking
 
 > **Semester Project** – Development of an autonomous vehicle as a semester project for the Prototyping and System Engineering module at Hochschule Hamm-Lippstadt. The vehicle autonomously follows a line, detects and reacts to colored obstacles, optimizes speed, supports multiple routing layouts (oval, figure-8), and executes autonomous parking.
 
----
 
-## 📑 Table of Contents
+## Table of Contents
 - [Overview](#-overview--system-features)
 - [System Diagrams](./System%20Diagrams/)
 - [Tinkercad Simulation](./Tinkercad%20Simulation/)
@@ -14,9 +13,8 @@
 - [Code Structure](#-code-structure)
 - [Contributors](#-contributors)
 
----
 
-## 📖 Overview & System Features
+## Overview & System Features
 
 This repository presents a complete systems engineering approach to building an autonomous vehicle. The vehicle is designed to be highly responsive and intelligent, capable of achieving the following:
 
@@ -28,7 +26,7 @@ This repository presents a complete systems engineering approach to building an 
 
 ---
 
-## 🖥 Tinkercad Simulation Prototype
+##  Tinkercad Simulation Prototype
 
 A fully functional simulation model has been constructed in **Tinkercad Circuits** to validate the logic before hardware implementation. 
 
@@ -39,7 +37,7 @@ A fully functional simulation model has been constructed in **Tinkercad Circuits
 - 2× DC Motors
 
 
-## ⚙️ Hardware Prototype & Assembly
+##  Hardware Prototype & Assembly
 
 The real-world implementation leverages customized 3D-printed parts and physical electronic components.
 
@@ -47,14 +45,14 @@ The real-world implementation leverages customized 3D-printed parts and physical
 - **[Assembly Instructions](./Assembly/):** Contains guides for wiring and physically constructing the robot. 
 - **[Electronics & Hardware](./Hardware/):** Components, datasheets, and material layouts. 
 
----
 
-## 📂 Code Structure
+
+##  Code Structure
 Its done. More to impliment.
 
----
 
-## 👥 Contributors
+
+##  Contributors
 
 A special thanks to the team behind this project:
 - [S M Mahmud Hasan](https://github.com/mahmudhasan9)
