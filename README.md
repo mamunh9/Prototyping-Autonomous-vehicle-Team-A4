@@ -1,4 +1,19 @@
-# Autonomous Driving Vehicle – Line Following with Obstacle Handling & Parking
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="100">
+  <style>
+    .title {
+      font: bold 40px sans-serif;
+    }
+  </style>
+
+  <text x="50%" y="50%" text-anchor="middle" class="title">
+    <animate attributeName="fill"
+             values="red;orange;yellow;green;blue;purple;red"
+             dur="2s"
+             repeatCount="indefinite"/>
+    Autonomous Driving Vehicle – Line Following with Obstacle Handling & Parking
+  </text>
+</svg>
+
 
 > **Semester Project** – Development of an autonomous vehicle as a semester project for the Prototyping and System Engineering module at Hochschule Hamm-Lippstadt. The vehicle autonomously follows a line, detects and reacts to colored obstacles, optimizes speed, supports multiple routing layouts (oval, figure-8), and executes autonomous parking.
 
