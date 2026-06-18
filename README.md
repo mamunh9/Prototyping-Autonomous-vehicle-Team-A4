@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&weight=700&size=80&pause=1000&color=00BFFF&center=true&width=800&lines=Autonomous+Vehicle+Driving;Line+Following;Obstacle+Detection;Automatic+Parking" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&weight=1200&size=80&pause=800&color=00BFFF&center=true&width=1200&lines=Autonomous+Vehicle+Driving;Line+Following;Obstacle+Avoidance;Automatic+Parking" alt="Typing SVG" />
 </div>
   
 
