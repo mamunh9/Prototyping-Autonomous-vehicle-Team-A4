@@ -1,5 +1,6 @@
+
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&weight=700&size=80&pause=600&color=00BFFF&center=true&width=2000&lines=Autonomous+Vehicle+Driving;Line+Following;Obstacle+Avoidance;Automatic+Parking" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&weight=700&size=70&pause=600&color=00BFFF&center=true&width=2000&lines=Autonomous+Driving;Line+Following;Obstacle+Avoidance;Automatic+Parking " alt="Typing SVG" />
 </div>
 
 > **Semester Project** – Development of an autonomous vehicle as a semester project for the Prototyping and System Engineering module at Hochschule Hamm-Lippstadt. The vehicle autonomously follows a line, detects and reacts to colored obstacles, optimizes speed, supports multiple routing layouts (oval, figure-8), and executes autonomous parking.
