@@ -1,6 +1,6 @@
 
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&weight=1200&size=40&pause=400&color=00BFFF&center=true&width=1000&lines=Autonomous+Driving;Line+Following;Obstacle+Avoidance;Automatic+Parking " alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&weight=1200&size=40&pause=300&color=00BFFF&center=true&width=1000&lines=Autonomous+Driving;Line+Following;Obstacle+Avoidance;Automatic+Parking " alt="Typing SVG" />
 </div>
 
 
@@ -20,7 +20,7 @@
 - [Overview](#-overview--system-features)
 - [System Diagrams](./System%20Diagrams/)
 - [Tinkercad Simulation](./Tinkercad%20Simulation/)
-- [Hardware](./Hardware/)
+- [Hardware Datasheets](./Hardware/)
 - [Prototype Design](./Prototype%20Design/)
 - [Assembly](./Assembly/)
 - [Code Structure](#-code-structure)
@@ -48,6 +48,7 @@ A fully functional simulation model has been constructed in **Tinkercad Circuits
 - 2× IR Line Tracking Sensors
 - 2× HC-SR04 Ultrasonic Sensors
 - 2× DC Motors
+- 9V Battery
 
 
 ##  Hardware Prototype & Assembly
