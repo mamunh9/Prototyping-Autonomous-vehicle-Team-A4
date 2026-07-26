@@ -1,0 +1,418 @@
+// ---------------- MOTOR PINS ----------------
+#define LeftMotorSpeed 10
+#define LeftMotorForward 6
+#define LeftMotorBackward 7
+
+#define RightMotorSpeed 11
+#define RightMotorForward 8
+#define RightMotorBackward 9
+
+
+// ---------------- IR SENSOR PINS ----------------
+#define IR_LEFT_SENSOR 5
+#define IR_RIGHT_SENSOR 4
+
+
+// ---------------- ULTRASONIC PINS ----------------
+#define TRIG_LEFT 13
+#define ECHO_LEFT 12
+
+#define TRIG_RIGHT 3
+#define ECHO_RIGHT 2
+
+
+// ---------------- NORMAL LINE FOLLOWING SPEEDS ----------------
+// Your working values
+#define FORWARD_SPEED 85
+#define TURN_SPEED 75
+
+
+// ---------------- OBSTACLE AVOIDANCE SPEEDS ----------------
+#define PIVOT_SPEED 60
+#define BYPASS_SPEED 72
+#define SEARCH_SPEED 55
+
+
+// ---------------- ULTRASONIC SETTINGS ----------------
+#define OBSTACLE_DISTANCE_CM 27
+#define MIN_VALID_CM 2
+#define ULTRASONIC_TIMEOUT_US 6000
+
+#define ULTRASONIC_CHECK_INTERVAL_MS 100
+#define OBSTACLE_IGNORE_AFTER_AVOID_MS 1500
+
+#define DEBUG_ULTRASONIC 0
+
+
+// ---------------- OBSTACLE PATH TIMINGS ----------------
+// Tune these one by one on your robot.
+#define LEFT_90_MS 600
+#define RIGHT_90_MS 600
+
+// Increased: gives more space between robot and obstacle
+#define SIDE_STEP_MS 650
+
+// Increased: robot moves farther past obstacle before returning to line
+#define PASS_OBSTACLE_MS 1150
+
+#define LINE_SEARCH_TIMEOUT_MS 9000
+
+
+// ---------------- LINE MEMORY ----------------
+// -1 = last correction was left
+//  1 = last correction was right
+//  0 = no direction known yet
+int lastDirection = 0;
+
+
+// ---------------- SYSTEM VARIABLES ----------------
+bool recoveryFailed = false;
+
+unsigned long lastUltrasonicCheck = 0;
+unsigned long ignoreObstacleUntil = 0;
+
+
+// =====================================================
+// SETUP
+// =====================================================
+
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(LeftMotorSpeed, OUTPUT);
+  pinMode(LeftMotorForward, OUTPUT);
+  pinMode(LeftMotorBackward, OUTPUT);
+
+  pinMode(RightMotorSpeed, OUTPUT);
+  pinMode(RightMotorForward, OUTPUT);
+  pinMode(RightMotorBackward, OUTPUT);
+
+  pinMode(IR_LEFT_SENSOR, INPUT);
+  pinMode(IR_RIGHT_SENSOR, INPUT);
+
+  pinMode(TRIG_LEFT, OUTPUT);
+  pinMode(ECHO_LEFT, INPUT);
+
+  pinMode(TRIG_RIGHT, OUTPUT);
+  pinMode(ECHO_RIGHT, INPUT);
+
+  digitalWrite(TRIG_LEFT, LOW);
+  digitalWrite(TRIG_RIGHT, LOW);
+
+  stopMotors();
+}
+
+
+// =====================================================
+// MOTOR FUNCTIONS
+// =====================================================
+
+void forwardAt(int speedValue) {
+  digitalWrite(LeftMotorForward, HIGH);
+  digitalWrite(LeftMotorBackward, LOW);
+
+  digitalWrite(RightMotorForward, HIGH);
+  digitalWrite(RightMotorBackward, LOW);
+
+  analogWrite(LeftMotorSpeed, speedValue);
+  analogWrite(RightMotorSpeed, speedValue);
+}
+
+
+void forward() {
+  forwardAt(FORWARD_SPEED);
+}
+
+
+// Your working left correction
+void turnLeft() {
+  digitalWrite(LeftMotorForward, HIGH);
+  digitalWrite(LeftMotorBackward, LOW);
+
+  digitalWrite(RightMotorForward, HIGH);
+  digitalWrite(RightMotorBackward, LOW);
+
+  analogWrite(LeftMotorSpeed, TURN_SPEED);
+  analogWrite(RightMotorSpeed, TURN_SPEED);
+}
+
+
+// Your working right correction
+void turnRight() {
+  digitalWrite(LeftMotorForward, HIGH);
+  digitalWrite(LeftMotorBackward, LOW);
+
+  digitalWrite(RightMotorForward, HIGH);
+  digitalWrite(RightMotorBackward, LOW);
+
+  analogWrite(LeftMotorSpeed, TURN_SPEED);
+  analogWrite(RightMotorSpeed, TURN_SPEED);
+}
+
+
+// Sharp left pivot for obstacle avoidance only
+void pivotLeft() {
+  digitalWrite(LeftMotorForward, LOW);
+  digitalWrite(LeftMotorBackward, HIGH);
+
+  digitalWrite(RightMotorForward, HIGH);
+  digitalWrite(RightMotorBackward, LOW);
+
+  analogWrite(LeftMotorSpeed, PIVOT_SPEED);
+  analogWrite(RightMotorSpeed, PIVOT_SPEED);
+}
+
+
+// Sharp right pivot for obstacle avoidance only
+void pivotRight() {
+  digitalWrite(LeftMotorForward, HIGH);
+  digitalWrite(LeftMotorBackward, LOW);
+
+  digitalWrite(RightMotorForward, LOW);
+  digitalWrite(RightMotorBackward, HIGH);
+
+  analogWrite(LeftMotorSpeed, PIVOT_SPEED);
+  analogWrite(RightMotorSpeed, PIVOT_SPEED);
+}
+
+
+void stopMotors() {
+  digitalWrite(LeftMotorForward, LOW);
+  digitalWrite(LeftMotorBackward, LOW);
+
+  digitalWrite(RightMotorForward, LOW);
+  digitalWrite(RightMotorBackward, LOW);
+
+  analogWrite(LeftMotorSpeed, 0);
+  analogWrite(RightMotorSpeed, 0);
+}
+
+
+// =====================================================
+// NORMAL BLACK LINE FOLLOWING
+// =====================================================
+
+void followLine() {
+  int left = digitalRead(IR_LEFT_SENSOR);
+  int right = digitalRead(IR_RIGHT_SENSOR);
+
+  // Both sensors see black line
+  if (left == HIGH && right == HIGH) {
+    forward();
+  }
+
+  // Left sensor sees black, right sensor sees white
+  else if (left == HIGH && right == LOW) {
+    turnLeft();
+  
+  }
+
+  // Left sensor sees white, right sensor sees black
+  else if (left == LOW && right == HIGH) {
+    turnRight();
+  
+  }
+}
+
+
+// =====================================================
+// ULTRASONIC FUNCTIONS
+// =====================================================
+
+long readDistanceCM(int trigPin, int echoPin) {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+
+  digitalWrite(trigPin, LOW);
+
+  unsigned long duration = pulseIn(echoPin, HIGH, ULTRASONIC_TIMEOUT_US);
+
+  if (duration == 0) {
+    return 999;
+  }
+
+  return duration * 0.034 / 2;
+}
+
+
+bool closeObject(long distanceCM) {
+  return (distanceCM >= MIN_VALID_CM &&
+          distanceCM <= OBSTACLE_DISTANCE_CM);
+}
+
+
+bool obstacleAhead() {
+  long leftDistance = readDistanceCM(TRIG_LEFT, ECHO_LEFT);
+
+  // Prevent ultrasonic interference
+  delay(25);
+
+  long rightDistance = readDistanceCM(TRIG_RIGHT, ECHO_RIGHT);
+
+#if DEBUG_ULTRASONIC
+  Serial.print("Left: ");
+  Serial.print(leftDistance);
+  Serial.print(" cm | Right: ");
+  Serial.println(rightDistance);
+#endif
+
+  return closeObject(leftDistance) || closeObject(rightDistance);
+}
+
+
+// =====================================================
+// BLACK LINE SEARCH AFTER OBSTACLE
+// =====================================================
+
+// Both sensors must see black.
+// Robot is centered on the black line.
+bool blackLineCentered() {
+  int left = digitalRead(IR_LEFT_SENSOR);
+  int right = digitalRead(IR_RIGHT_SENSOR);
+
+  return (left == HIGH && right == HIGH);
+}
+
+
+// Checks the line twice to avoid a false reading.
+bool blackLineCenteredConfirmed() {
+  if (!blackLineCentered()) {
+    return false;
+  }
+
+  delay(15);
+
+  return blackLineCentered();
+}
+
+
+// Search slowly for black line.
+bool driveForwardUntilBlackLine(unsigned long timeoutMs) {
+  forwardAt(SEARCH_SPEED);
+
+  unsigned long startTime = millis();
+
+  while (millis() - startTime < timeoutMs) {
+    if (blackLineCenteredConfirmed()) {
+      stopMotors();
+      delay(500);
+      return true;
+    }
+
+    delay(1);
+  }
+
+  stopMotors();
+  return false;
+}
+
+
+// =====================================================
+// LEFT-SIDE OBSTACLE AVOIDANCE
+// =====================================================
+
+void avoidObstacle() {
+
+  // 1. Stop before obstacle
+  stopMotors();
+  delay(150);
+
+  // 2. Turn left 90°
+  pivotLeft();
+  delay(700);
+
+  stopMotors();
+  delay(100);
+
+  // 3. Move left beside obstacle
+  forwardAt(BYPASS_SPEED);
+  delay(800);
+
+  stopMotors();
+  delay(100);
+
+  // 4. Turn right 90° and face forward again
+  pivotRight();
+  delay(600);
+
+  stopMotors();
+  delay(100);
+
+  // 5. Move forward fully past obstacle
+  forwardAt(BYPASS_SPEED);
+  delay(500);
+
+  stopMotors();
+  delay(100);
+
+  // 6. Turn right 90° toward original black line
+  pivotRight();
+  delay(300);
+
+  stopMotors();
+  delay(100);
+
+  // 7. Move until both IR sensors find black line
+  if (driveForwardUntilBlackLine(LINE_SEARCH_TIMEOUT_MS)) {
+
+    stopMotors();
+    delay(200);
+
+    // 8. Turn left 90° to face original direction
+    pivotLeft();
+    delay(400);
+
+    stopMotors();
+    delay(100);
+
+    // Let line follower stabilise before reading ultrasonic again
+    ignoreObstacleUntil = millis() + OBSTACLE_IGNORE_AFTER_AVOID_MS;
+
+    return;
+  }
+
+  // Could not find black line: stop safely
+  stopMotors();
+  recoveryFailed = true;
+}
+
+
+// =====================================================
+// MAIN LOOP
+// =====================================================
+
+void loop() {
+
+  // Stay stopped after recovery failure
+  if (recoveryFailed) {
+    stopMotors();
+    return;
+  }
+
+  // Normal black line following
+  followLine();
+
+  // Ignore obstacle sensors briefly after returning to line
+  if (millis() < ignoreObstacleUntil) {
+    return;
+  }
+
+  // Ultrasonic check every 100 ms
+  if (millis() - lastUltrasonicCheck < ULTRASONIC_CHECK_INTERVAL_MS) {
+    return;
+  }
+
+  lastUltrasonicCheck = millis();
+
+  // Confirm obstacle before starting avoidance
+  if (obstacleAhead()) {
+    delay(20);
+
+    if (obstacleAhead()) {
+      avoidObstacle();
+    }
+  }
+}
